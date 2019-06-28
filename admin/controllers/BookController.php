@@ -1,24 +1,28 @@
 <?php
-include './models/BookCategory.php';
-class BookCategoryController{
-    private $book_category_model;
+include './models/Book.php';
+class BookController{
+    private $book_model;
 
     function __construct(){
-        $this->book_category_model = new BookCategory();
+        $this->book_model = new Book();
     }
 
     //Display data from database
     public function index(){
-        return $this->book_category_model->select_book_category();
+        return $this->book_model->select_book();
     }
     //Create to save database
     public function create(){
-        if (!empty($_POST['ten_loaisach'])){
-            $ten_loaisach = $_POST['ten_loaisach'];
-            $mo_ta = $_POST['mo_ta'];
+        if (!empty($_POST['ten_sach'])){
+            $bookcategory_id = $_POST['bookcategory_id'];
+            $ten_sach = $_POST['ten_sach'];
+            $nha_xuat_ban = $_POST['nha_xuat_ban'];
+            $so_luong = $_POST['so_luong'];
+            $gia = $_POST['gia'];
             $ngay_tao = date("Y-m-d h:i:sa");
             $nguoi_tao = 'admin';
-            $result = $this->book_category_model->insert_book_category($ten_loaisach, $mo_ta, $ngay_tao, $nguoi_tao);
+            $result = $this->book_model->insert_book($bookcategory_id,$ten_sach,$nha_xuat_ban,$so_luong,$gia,$ngay_tao,$nguoi_tao);
+
             if ($result){
                 echo "Thêm mới thành công";
             }else{
@@ -30,13 +34,16 @@ class BookCategoryController{
     }
     //Update data
     public function update(){
-        if (!empty($_POST['ten_loaisach'])){
+        if (!empty($_POST['ten_sach'])){
+            $book_id = $_POST['book_id'];
             $bookcategory_id = $_POST['bookcategory_id'];
-            $ten_loaisach = $_POST['ten_loaisach'];
-            $mo_ta = $_POST['mo_ta'];
+            $ten_sach = $_POST['ten_sach'];
+            $nha_xuat_ban = $_POST['nha_xuat_ban'];
+            $so_luong = $_POST['so_luong'];
+            $gia = $_POST['gia'];
             $ngay_cap_nhat = date("Y-m-d h:i:sa");
             $nguoi_cap_nhat = 'admin';
-            $result = $this->book_category_model->update_book_category($bookcategory_id, $ten_loaisach, $mo_ta, $ngay_cap_nhat, $nguoi_cap_nhat);
+            $result = $this->book_model->update_book($book_id, $bookcategory_id,$ten_sach, $nha_xuat_ban, $so_luong, $gia, $ngay_cap_nhat, $nguoi_cap_nhat);
             if ($result){
                 echo "Cập nhật thành công";
             }else{
@@ -46,27 +53,22 @@ class BookCategoryController{
             echo "<p class='text-danger'>Bạn chưa nhập tên thể loại sách!</p>";
         }
     }
-    public function listBookCategory()
-        {
-            $bookcategory_data = $this->book_category_model->select_book_category();
-            return $bookcategory_data;
-        }
     public function detail(){
-        $bookcategory_id = $_GET['edit_theloaisach'];
+        $id = $_GET['edit_sach'];
         //goi model
-        $result = $this->book_category_model->select_One_Record($bookcategory_id);
+        $result = $this->book_model->select_One_Record($id);
         return $result;
     }
     //Delete data
     public function delete_detail(){
-        $bookcategory_id = $_GET['delete_theloaisach'];
-        $result = $this->book_category_model->select_One_Record($bookcategory_id);
+        $id = $_GET['delete_sach'];
+        $result = $this->book_model->select_One_Record($id);
         return $result;
     }
     public function delete(){
-        $bookcategory_id = $_POST['bookcategory_id'];
+        $id = $_POST['book_id'];
         //goi model
-        $result = $this->book_category_model->delete_book_category($bookcategory_id);
+        $result = $this->book_model->delete_book($id);
         if ($result){
             echo "Delete thanh cong";
         }else{

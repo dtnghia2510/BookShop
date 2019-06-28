@@ -1,5 +1,5 @@
 <?php
-include './models/connect.php';
+include_once './models/connect.php';
 class BookCategory extends connect{
     private $db_connect;
     function __construct(){
