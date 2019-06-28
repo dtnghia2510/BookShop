@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <h3>Cập nhật loại sách</h3>
     <form action="" method="post">
-        <input type="hidden" name="id" value="<?php echo $result[0] ?>">
+        <input type="hidden" name="bookcategory_id" value="<?php echo $result[0] ?>">
 
         <div class="form-group">
             <label for="">Tên loại sách</label>
