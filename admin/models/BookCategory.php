@@ -26,7 +26,7 @@ class BookCategory extends connect{
     public function update_book_category($id_loaisach, $ten_loaisach, $mo_ta, $ngay_cap_nhat, $nguoi_cap_nhat){
         $sql = "Update bookcategory 
                 SET ten_loaisach = '$ten_loaisach', mo_ta = '$mo_ta', ngay_cap_nhat = '$ngay_cap_nhat', nguoi_cap_nhat = '$nguoi_cap_nhat' 
-                where id = $id_loaisach";
+                where bookcategory_id = $id_loaisach";
         $result = $this->db_connect->updateQuery($sql);
         return $result;
     }
@@ -34,7 +34,7 @@ class BookCategory extends connect{
     public function select_One_Record($id_loaisach){
         $sql = "Select *
                 From bookcategory
-                Where id = $id_loaisach";
+                Where bookcategory_id = $id_loaisach";
         $result  = $this->db_connect->selectOneRecord($sql);
         return $result;
     }
@@ -42,7 +42,7 @@ class BookCategory extends connect{
     public function delete_book_category($id_loaisach){
         $sql = "Delete
                 From bookcategory
-                where id = $id_loaisach";
+                where bookcategory_id = $id_loaisach";
         $result = $this->db_connect->deleteQuery($sql);
         return $result;
     }
